@@ -42,7 +42,6 @@ body
     left: 0;
     top: 0;
     width: 100%;
-    height: 100%;
     background-color: white;
     text-align: center;
     border-right:1px outset black ;
@@ -53,6 +52,7 @@ body
 .lateral
 {
     width: 260px;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;

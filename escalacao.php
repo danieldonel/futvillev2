@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="escalacao.css">
+    <link rel="stylesheet" href="rodape.css">
     <script src="rodape.js"></script>
     <script src="escalacao.js"></script>
 </head>
@@ -56,63 +57,63 @@
     <hr>
 
     <div class="atacante">
-            <button class="botao-atacante">
+            <button class="botao-atacante" onclick="filtrarAtacantes();">
             <span class="sinal-mais">+</span>
             </button>
             <div class="transparente"></div>
 
-            <button class="botao-atacante">
+            <button class="botao-atacante" onclick="filtrarAtacantes();">
             <span class="sinal-mais">+</span>
             </button>
             <div class="transparente"></div>
 
-            <button class="botao-atacante">
+            <button class="botao-atacante" onclick="filtrarAtacantes();">
             <span class="sinal-mais">+</span>
             </button>
             <div class="transparente"></div>
         </div>
 
         <div class="meiocampo">
-            <button class="botao-atacante">
+        <button class="botao-atacante" onclick="filtrarMeias();">
             <span class="sinal-mais">+</span>
             </button>
             <div class="transparente"></div>
 
-            <button class="botao-atacante">
+            <button class="botao-atacante" onclick="filtrarMeias();">
             <span class="sinal-mais">+</span>
             </button>
             <div class="transparente"></div>
 
-            <button class="botao-atacante">
+            <button class="botao-atacante" onclick="filtrarMeias();">
             <span class="sinal-mais">+</span>
             </button>
             <div class="transparente"></div>
         </div>
 
         <div class="zagueiro">
-            <button class="botao-atacante">
+            <button class="botao-atacante" onclick="filtrarLaterais();">
             <span class="sinal-mais">+</span>
             </button>
             <div class="transparente1"></div>
 
-            <button class="botao-atacante">
+            <button class="botao-atacante" onclick="filtrarZagueiros();">
             <span class="sinal-mais">+</span>
             </button>
             <div class="transparente1"></div>
 
-            <button class="botao-atacante">
+            <button class="botao-atacante" onclick="filtrarZagueiros();">
             <span class="sinal-mais">+</span>
             </button>
             <div class="transparente1"></div>
 
-            <button class="botao-atacante">
+            <button class="botao-atacante" onclick="filtrarLaterais();">
             <span class="sinal-mais">+</span>
             </button>
             <div class="transparente1"></div>
         </div>
 
         <div class="goleiro">
-            <button class="botao-atacante">
+            <button class="botao-atacante" onclick="filtrarGoleiro();">
             <span class="sinal-mais">+</span>
             </button>
         </div>
@@ -126,15 +127,19 @@
         $comando = $pdo->prepare("SELECT * FROM `jogadores`");
         $resultado = $comando->execute();
 
-            while ( $linhas = $comando->fetch() )
-            {
-                $nome = $linhas ["nome"];
-                $foto = $linhas ["foto"];
-                $foto=base64_encode($foto);
-                $posicao = $linhas ["posicao"];
-                $preco = $linhas ["preco"];
-                echo("
-                <div class=\"tudo\" id=\"tudo\">
+        while ($linhas = $comando->fetch()) {
+            $nome = $linhas["nome"];
+            $foto = $linhas["foto"];
+            $foto = base64_encode($foto);
+            $posicao = $linhas["posicao"];
+            $preco = $linhas["preco"];
+        
+            
+            echo("<div style=\"margin-bottom: 10px;\"></div>");
+    
+        
+            echo("
+                <div class=\"tudo\" data-posicao=\"$posicao\">
                     <div class=\"fild\">
                         <img src=\"data:image/jpeg;base64,$foto\" class=\"fotomercado\" width='120px' height='120px'>
                         
@@ -157,7 +162,7 @@
                         </div>
                      </div>
 
-                     <br>
+
                 ");
             }
         ?>

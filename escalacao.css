@@ -45,53 +45,6 @@ body
     height: 290px;
 }
 
-.lateral
-{
-    
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    text-align: center;
-    border-right:1px outset black ;
-
-    
-  
-}
-.lateral
-{
-    width: 260px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    position: absolute;
-    left: -285px;
-
-    
-   
-}
-.animar
-{
-    animation: deslizar 2s forwards;
-}
-@keyframes deslizar
-{
-    0%{left:-285px;}    
-    100%{left:0px;} 
-}
-
-.fechar
-{
-    margin-top: 15px;
-    margin-left: 210px;
-    border-radius: 20px;
-    font-size: 18px;
-    display: flex;
-
-}
 
 .escalacao
 {
@@ -164,19 +117,6 @@ hr
     align-items: center;
 }
 
-.botao-circular {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: none;
-    color: rgb(173, 173, 173);
-    font-size: 24px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
   .sinal-mais {
     font-weight: bold;
   }
@@ -274,9 +214,7 @@ hr
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    border: none;
     color: rgb(255, 255, 255);
-    box-shadow: 100px;
     background-color: RGB(38, 202, 94);
     font-size: 24px;
     display: flex;
