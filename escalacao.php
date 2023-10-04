@@ -42,80 +42,85 @@
         <img class="campinho" src="img/campinho.png" width="350px">
     </div>
 
+    <?php
+    
+    include("conecta.php"); // conectar com banco de dados
+    $comando = $pdo->prepare("SELECT * FROM `cadastro`");
+    $resultado = $comando->execute();
 
-    <div class="carteira">
-        <div class="carteira_valor">
+    while ($linhas = $comando->fetch()) 
+        $saldo = $linhas["saldo"];
+
+        echo("<div class=\"carteira\">
+        <div class=\"carteira_valor\">
             PREÇO DO TIME <br>
-            F$ <b>0.00</b>
+            F$ <b>$saldo</b>
         </div>
-        <div class="divisao"></div>
-        <div class="carteira_saldo">
+        <div class=\"divisao\"></div>
+        <div class=\"carteira_saldo\">
             VOCÊ AINDA TEM <br>
             F$ <b>0.00</b>
         </div>
     </div>
+    
+    ")
+    ?>
     <hr>
 
     <div class="atacante">
+            <button class="botao-atacante" id="atacante1" onclick="filtrarAtacantes();"></button>
+            <div class="transparente"></div>
+
             <button class="botao-atacante" onclick="filtrarAtacantes();">
-            <span class="sinal-mais">+</span>
+            <span id="atacante2" class="sinal-mais">+</span>
             </button>
             <div class="transparente"></div>
 
             <button class="botao-atacante" onclick="filtrarAtacantes();">
-            <span class="sinal-mais">+</span>
-            </button>
-            <div class="transparente"></div>
-
-            <button class="botao-atacante" onclick="filtrarAtacantes();">
-            <span class="sinal-mais">+</span>
+            <span id="atacante3" class="sinal-mais">+</span>
             </button>
             <div class="transparente"></div>
         </div>
 
         <div class="meiocampo">
         <button class="botao-atacante" onclick="filtrarMeias();">
-            <span class="sinal-mais">+</span>
+            <span id="meio1" class="sinal-mais">+</span>
             </button>
             <div class="transparente"></div>
 
             <button class="botao-atacante" onclick="filtrarMeias();">
-            <span class="sinal-mais">+</span>
+            <span id="meio2" class="sinal-mais">+</span>
             </button>
             <div class="transparente"></div>
 
             <button class="botao-atacante" onclick="filtrarMeias();">
-            <span class="sinal-mais">+</span>
+            <span id="meio3" class="sinal-mais">+</span>
             </button>
             <div class="transparente"></div>
         </div>
 
         <div class="zagueiro">
             <button class="botao-atacante" onclick="filtrarLaterais();">
-            <span class="sinal-mais">+</span>
+            <span id="lateral1" class="sinal-mais">+</span>
             </button>
             <div class="transparente1"></div>
 
             <button class="botao-atacante" onclick="filtrarZagueiros();">
-            <span class="sinal-mais">+</span>
+            <span id="zagueiro1" class="sinal-mais">+</span>
             </button>
             <div class="transparente1"></div>
 
             <button class="botao-atacante" onclick="filtrarZagueiros();">
-            <span class="sinal-mais">+</span>
+            <span id="zagueiro2" class="sinal-mais">+</span>
             </button>
             <div class="transparente1"></div>
 
-            <button class="botao-atacante" onclick="filtrarLaterais();">
-            <span class="sinal-mais">+</span>
-            </button>
+            <button class="botao-atacante" id="lateral2" onclick="filtrarLaterais();"></button>
             <div class="transparente1"></div>
         </div>
 
         <div class="goleiro">
-            <button class="botao-atacante" onclick="filtrarGoleiro();">
-            <span class="sinal-mais">+</span>
-            </button>
+            <button class="botao-atacante" id="goleiro" onclick="filtrarGoleiro();"></button>
         </div>
 
     <div class="SUAESCALAÇÃO"><b>MERCADO</b></div>
@@ -126,8 +131,9 @@
         include("conecta.php"); // conectar com banco de dados
         $comando = $pdo->prepare("SELECT * FROM `jogadores`");
         $resultado = $comando->execute();
-
+        $n = 0;
         while ($linhas = $comando->fetch()) {
+            $n = $n+1;
             $nome = $linhas["nome"];
             $foto = $linhas["foto"];
             $foto = base64_encode($foto);
@@ -155,7 +161,7 @@
                             F$<div class=\"preco\">$preco</div>
                             </div>
                             
-                            <div class=\"comprar botao-comprar\" data-action=\"comprar\" id=\"myButton\"> COMPRAR </div>
+                            <div  class=\"comprar botao-comprar\" onclick=\"trocaimagem('$posicao','$foto', 'myButton$n');\" data-action=\"comprar\" id=\"myButton$n\"> COMPRAR </div>
                         </div>
 
                         </div>
