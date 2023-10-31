@@ -109,50 +109,16 @@ function filtrarGoleiro() {
     }
 }
 
-function trocaimagem(posicao, f, bt)
-{
-    if(posicao == "goleiro")
-    {
-        if(document.getElementById(bt).innerText == "COMPRAR")
-        {
-            goleiro.style.backgroundImage = "url(\"data:image/png;base64," +f+"\")"
-            goleiro.style.backgroundSize = "100% 100%"
-            goleiro.style.backgroundRepeat = no-repeat;
-        }
-
-        else
-        {
-            goleiro.style.backgroundImage = ""
-        }
-    }
-
-    if(posicao == "atacante")
-    {
-        
-        if(atacante1.style.backgroundImage == "")
-        {
-            atacante1.style.backgroundImage = "url(\"data:image/png;base64," +f+"\")"
-            atacante1.style.backgroundSize = "100% 100%"
-            atacante1.style.backgroundRepeat = "no-repeat"
-        }
-
-        else if(atacante2.style.backgroundImage == "")
-            {
-                atacante2.style.backgroundImage = "url(\"data:image/png;base64," +f+"\")"
-                atacante2.style.backgroundSize = "40px"
-                atacante2.style.backgroundRepeat = "no-repeat"
+$(document).ready(function() {
+    $(".botao-comprar").click(function() {
+        var jogadorId = $(this).attr("id");
+        $.ajax({
+            type: "POST",
+            url: "adicionar_jogador.php", // Arquivo PHP para processar a solicitação
+            data: { jogadorId: jogadorId },
+            success: function(response) {
+                alert(response); // Exibe a resposta do servidor (por exemplo, "Jogador adicionado com sucesso")
             }
-        
-
-            else
-            {
-                if(atacante3.style.backgroundImage == "")
-                {
-                    atacante3.style.backgroundImage = "url(\"data:image/png;base64," +f+"\")"
-                    atacante3.style.backgroundSize = "40px"
-                    atacante3.style.backgroundRepeat = "no-repeat"
-                }
-            }
-    }
-
-}
+        });
+    });
+});

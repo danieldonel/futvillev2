@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="rodape.css">
     <script src="rodape.js"></script>
     <script src="escalacao.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="cabecalho">
@@ -42,31 +43,20 @@
         <img class="campinho" src="img/campinho.png" width="350px">
     </div>
 
-    <?php
-    
-    include("conecta.php"); // conectar com banco de dados
-    $comando = $pdo->prepare("SELECT * FROM `cadastro`");
-    $resultado = $comando->execute();
-
-    while ($linhas = $comando->fetch()) 
-        $saldo = $linhas["saldo"];
-
-        echo("<div class=\"carteira\">
-        <div class=\"carteira_valor\">
+   <div class="carteira">
+        <div class="carteira_valor">
             PREÇO DO TIME <br>
-            F$ <b>$saldo</b>
+            F$ <b>0.00</b>
         </div>
-        <div class=\"divisao\"></div>
-        <div class=\"carteira_saldo\">
+        <div class="divisao"></div>
+        <div class="carteira_saldo">
             VOCÊ AINDA TEM <br>
             F$ <b>0.00</b>
         </div>
     </div>
-    
-    ")
-    ?>
-    <hr>
 
+    <hr>
+    
     <div class="atacante">
             <button class="botao-atacante" id="atacante1" onclick="filtrarAtacantes();"></button>
             <div class="transparente"></div>
@@ -123,17 +113,54 @@
             <button class="botao-atacante" id="goleiro" onclick="filtrarGoleiro();"></button>
         </div>
 
-    <div class="SUAESCALAÇÃO"><b>MERCADO</b></div>
-    <br>
-    <div class="jogadoresmercado">
+
+    <?php
+
+        include("conecta.php"); // conectar com banco de dados
+        $comando = $pdo->prepare("SELECT DISTINCT jogadores.id, jogadores.foto, escalacao.atacante1, escalacao.atacante2, escalacao.atacante3, escalacao.meio1, escalacao.meio2, escalacao.meio3, escalacao.zagueiro1, escalacao.zagueiro2, escalacao.lateral1, escalacao.lateral2, escalacao.goleiro FROM escalacao JOIN jogadores ON escalacao.atacante1 = jogadores.id OR escalacao.atacante2 = jogadores.id OR escalacao.atacante3 = jogadores.id OR escalacao.meio1 = jogadores.id OR escalacao.meio2 = jogadores.id OR escalacao.meio3 = jogadores.id OR escalacao.zagueiro1 = jogadores.id OR escalacao.zagueiro2 = jogadores.id OR escalacao.lateral1 = jogadores.id OR escalacao.lateral2 = jogadores.id OR escalacao.goleiro = jogadores.id WHERE jogadores.id IS NOT NULL;");
+        $resultado = $comando->execute();
+
+        $posicoes = array('atacante1', 'atacante2', 'atacante3', 'meio1', 'meio2', 'meio3', 'zagueiro1', 'zagueiro2', 'lateral1', 'lateral2', 'goleiro');
+        $jogadores = array(); // Array para armazenar os jogadores únicos
+
+        while ($linhas = $comando->fetch()) {
+            $id = $linhas["id"];
+            if (!in_array($id, $jogadores)) {
+                $foto = base64_encode($linhas["foto"]);
+                $jogadores[] = $id; // Adiciona o id do jogador ao array para evitar duplicatas
+                
+                echo("<img src=\"data:image/jpeg;base64,$foto\" class=\"fotopreenchida ");
+                
+                $posicaoEncontrada = false;
+                foreach ($posicoes as $posicao) {
+                    if (!empty($linhas[$posicao]) && $linhas[$posicao] == $id) {
+                        echo($posicao);
+                        $posicaoEncontrada = true;
+                        break;
+                    }
+                }
+                
+                if (!$posicaoEncontrada) {
+                    echo("Posição não encontrada");
+                }
+                
+                echo("\">");
+                echo("<div class=\"transparente\"></div>");
+                echo("</div>");
+            }
+        }
+    ?>
+
+
+
+
     <?php
         
         include("conecta.php"); // conectar com banco de dados
         $comando = $pdo->prepare("SELECT * FROM `jogadores`");
         $resultado = $comando->execute();
-        $n = 0;
         while ($linhas = $comando->fetch()) {
-            $n = $n+1;
+            $id = $linhas ["id"];
             $nome = $linhas["nome"];
             $foto = $linhas["foto"];
             $foto = base64_encode($foto);
@@ -161,7 +188,7 @@
                             F$<div class=\"preco\">$preco</div>
                             </div>
                             
-                            <div  class=\"comprar botao-comprar\" onclick=\"trocaimagem('$posicao','$foto', 'myButton$n');\" data-action=\"comprar\" id=\"myButton$n\"> COMPRAR </div>
+                            <div  class=\"comprar botao-comprar\" data-action=\"comprar\" id=\"$id\"> COMPRAR </div>
                         </div>
 
                         </div>
@@ -173,7 +200,7 @@
             }
         ?>
 
-    </div>
+</div>
 
     
 </html>
