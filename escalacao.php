@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="escalacao.css">
     <link rel="stylesheet" href="rodape.css">
     <script src="rodape.js"></script>
     <script src="escalacao.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="cabecalho">
@@ -57,99 +57,63 @@
 
     <hr>
     
+    
+    
     <div class="atacante">
-            <button class="botao-atacante" id="atacante1" onclick="filtrarAtacantes();"></button>
+            <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarAtacantes();"></button>
             <div class="transparente"></div>
 
             <button class="botao-atacante" onclick="filtrarAtacantes();">
-            <span id="atacante2" class="sinal-mais">+</span>
+            <span id="atacante" class="sinal-mais">+</span>
             </button>
             <div class="transparente"></div>
 
-            <button class="botao-atacante" onclick="filtrarAtacantes();">
-            <span id="atacante3" class="sinal-mais">+</span>
-            </button>
+            <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarAtacantes();"></button>
             <div class="transparente"></div>
         </div>
 
         <div class="meiocampo">
-        <button class="botao-atacante" onclick="filtrarMeias();">
-            <span id="meio1" class="sinal-mais">+</span>
+        <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarAtacantes();"></button>
+            <div class="transparente"></div>
+
+
+            <button class="botao-atacante" onclick="filtrarMeias();">
+            <span id="meio" class="sinal-mais">+</span>
             </button>
             <div class="transparente"></div>
 
-            <button class="botao-atacante" onclick="filtrarMeias();">
-            <span id="meio2" class="sinal-mais">+</span>
-            </button>
+            <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarAtacantes();"></button>
             <div class="transparente"></div>
 
-            <button class="botao-atacante" onclick="filtrarMeias();">
-            <span id="meio3" class="sinal-mais">+</span>
-            </button>
-            <div class="transparente"></div>
         </div>
 
         <div class="zagueiro">
-            <button class="botao-atacante" onclick="filtrarLaterais();">
-            <span id="lateral1" class="sinal-mais">+</span>
+        <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarAtacantes();"></button>
+            <div class="transparente1"></div>
+
+
+            <button class="botao-atacante" onclick="filtrarZagueiros();">
+            <span id="zagueiro" class="sinal-mais">+</span>
             </button>
+            <div class="transparente1"></div>
+
+            <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarAtacantes();"></button>
             <div class="transparente1"></div>
 
             <button class="botao-atacante" onclick="filtrarZagueiros();">
-            <span id="zagueiro1" class="sinal-mais">+</span>
+            <span id="lateral" class="sinal-mais">+</span>
             </button>
-            <div class="transparente1"></div>
-
-            <button class="botao-atacante" onclick="filtrarZagueiros();">
-            <span id="zagueiro2" class="sinal-mais">+</span>
-            </button>
-            <div class="transparente1"></div>
-
-            <button class="botao-atacante" id="lateral2" onclick="filtrarLaterais();"></button>
             <div class="transparente1"></div>
         </div>
 
         <div class="goleiro">
-            <button class="botao-atacante" id="goleiro" onclick="filtrarGoleiro();"></button>
+            <button class="botao-atacante" onclick="filtrarGoleiro();">
+            <span id="goleiro" class="sinal-mais">+</span>
+            </button>
+            <div class="transparente1"></div>
         </div>
 
 
-    <?php
-
-        include("conecta.php"); // conectar com banco de dados
-        $comando = $pdo->prepare("SELECT DISTINCT jogadores.id, jogadores.foto, escalacao.atacante1, escalacao.atacante2, escalacao.atacante3, escalacao.meio1, escalacao.meio2, escalacao.meio3, escalacao.zagueiro1, escalacao.zagueiro2, escalacao.lateral1, escalacao.lateral2, escalacao.goleiro FROM escalacao JOIN jogadores ON escalacao.atacante1 = jogadores.id OR escalacao.atacante2 = jogadores.id OR escalacao.atacante3 = jogadores.id OR escalacao.meio1 = jogadores.id OR escalacao.meio2 = jogadores.id OR escalacao.meio3 = jogadores.id OR escalacao.zagueiro1 = jogadores.id OR escalacao.zagueiro2 = jogadores.id OR escalacao.lateral1 = jogadores.id OR escalacao.lateral2 = jogadores.id OR escalacao.goleiro = jogadores.id WHERE jogadores.id IS NOT NULL;");
-        $resultado = $comando->execute();
-
-        $posicoes = array('atacante1', 'atacante2', 'atacante3', 'meio1', 'meio2', 'meio3', 'zagueiro1', 'zagueiro2', 'lateral1', 'lateral2', 'goleiro');
-        $jogadores = array(); // Array para armazenar os jogadores únicos
-
-        while ($linhas = $comando->fetch()) {
-            $id = $linhas["id"];
-            if (!in_array($id, $jogadores)) {
-                $foto = base64_encode($linhas["foto"]);
-                $jogadores[] = $id; // Adiciona o id do jogador ao array para evitar duplicatas
-                
-                echo("<img src=\"data:image/jpeg;base64,$foto\" class=\"fotopreenchida ");
-                
-                $posicaoEncontrada = false;
-                foreach ($posicoes as $posicao) {
-                    if (!empty($linhas[$posicao]) && $linhas[$posicao] == $id) {
-                        echo($posicao);
-                        $posicaoEncontrada = true;
-                        break;
-                    }
-                }
-                
-                if (!$posicaoEncontrada) {
-                    echo("Posição não encontrada");
-                }
-                
-                echo("\">");
-                echo("<div class=\"transparente\"></div>");
-                echo("</div>");
-            }
-        }
-    ?>
 
 
 
@@ -188,7 +152,7 @@
                             F$<div class=\"preco\">$preco</div>
                             </div>
                             
-                            <div  class=\"comprar botao-comprar\" data-action=\"comprar\" id=\"$id\"> COMPRAR </div>
+                            <button class=\"comprar botao-comprar\" data-action=\"comprar\" data-id=\"$id\" data-posicao=\"$posicao\"> COMPRAR </button>
                         </div>
 
                         </div>

@@ -1,23 +1,3 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const buttons = document.querySelectorAll(".comprar");
-
-    buttons.forEach(button => {
-        button.addEventListener("click", function () {
-            if (button.getAttribute("data-action") === "comprar") {
-                button.innerHTML = "VENDER";
-                button.setAttribute("data-action", "vender");
-                button.classList.remove("botao-comprar");
-                button.classList.add("botao-vender");
-            } else if (button.getAttribute("data-action") === "vender") {
-                button.innerHTML = "COMPRAR";
-                button.setAttribute("data-action", "comprar");
-                button.classList.remove("botao-vender");
-                button.classList.add("botao-comprar");
-            }
-        });
-    });
-});
-
 function filtrarAtacantes() {
     // Obtém todos os jogadores no mercado
     var jogadores = document.querySelectorAll('.tudo');
@@ -105,19 +85,31 @@ function filtrarGoleiro() {
         } else {
             // Mostra jogadores que são atacantes
             jogador.style.display = 'block';
-        }
+        } v
     }
 }
 
-$(document).ready(function() {
-    $(".botao-comprar").click(function() {
-        var jogadorId = $(this).attr("id");
+$(document).ready(function () {
+    $(".botao-comprar").on("click", function () {
+        var idJogador = $(this).data("id");
+        var posicao = $(this).data("posicao");
+
+        // Use $.ajax em vez de ajax
         $.ajax({
             type: "POST",
-            url: "adicionar_jogador.php", // Arquivo PHP para processar a solicitação
-            data: { jogadorId: jogadorId },
-            success: function(response) {
-                alert(response); // Exibe a resposta do servidor (por exemplo, "Jogador adicionado com sucesso")
+            url: "adicionar_escalacao.php",
+            data: { id_jogador: idJogador, posicao: posicao },
+            success: function (response) {
+                // Manipular a resposta do servidor, se necessário
+                console.log(response);
+
+                // Se a resposta for um JSON, você pode acessar os dados assim:
+                // var jsonData = JSON.parse(response);
+                // console.log(jsonData);
+            },
+            error: function (error) {
+                // Lidar com erros, se houver
+                console.error(error);
             }
         });
     });
