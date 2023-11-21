@@ -58,8 +58,142 @@
     <hr>
     
     
-    
+    <?php
+include("conecta.php"); // conectar com banco de dados
+session_start();
+
+if ($_SESSION["logado"]) {
+    $idUsuarioLogado = $_SESSION["id"];
+    echo "ID do Usuário: $idUsuarioLogado<br>";
+} else {
+    // O usuário não está logado
+    // Redirecione ou tome outra ação apropriada
+}
+
+$comando = $pdo->prepare("SELECT * FROM escalacao INNER JOIN jogadores ON jogadores.id = escalacao.atacante WHERE escalacao.id = ?");
+$resultado = $comando->execute([$idUsuarioLogado]);
+
+while ($linhas = $comando->fetch()) {
+    $id = $linhas["id"];
+    $nome = $linhas["nome"];
+    $foto = base64_encode($linhas["foto"]);
+    $posicao = $linhas["posicao"];
+    $preco = $linhas["preco"];
+    ?>
     <div class="atacante">
+        <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarAtacantes();">
+        <div class="transparente"></div>
+
+        <img src="data:image/jpeg;base64, <?php echo $foto; ?>" class="botao-foto" onclick="filtrarAtacantes();">
+        <div class="transparente"></div>
+
+        <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarAtacantes();">
+        <div class="transparente"></div>
+    </div>
+    <?php
+}
+?>
+
+<?php
+include("conecta.php"); // conectar com banco de dados
+
+$comando = $pdo->prepare("SELECT * FROM escalacao INNER JOIN jogadores ON jogadores.id = escalacao.meio WHERE escalacao.id = ?");
+$resultado = $comando->execute([$idUsuarioLogado]);
+
+while ($linhas = $comando->fetch()) {
+    $id = $linhas["id"];
+    $nome = $linhas["nome"];
+    $foto = base64_encode($linhas["foto"]);
+    $posicao = $linhas["posicao"];
+    $preco = $linhas["preco"];
+    ?>
+    <div class="meiocampo">
+        <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarMeias();">
+        <div class="transparente"></div>
+
+        <img src="data:image/jpeg;base64, <?php echo $foto; ?>" class="botao-foto" onclick="filtrarMeias();">
+        <div class="transparente"></div>
+
+        <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarMeias();">
+        <div class="transparente"></div>
+    </div>
+    <?php
+}
+?>
+
+<?php
+include("conecta.php"); // conectar com banco de dados
+
+$comando = $pdo->prepare("SELECT * FROM escalacao INNER JOIN jogadores ON jogadores.id = escalacao.zagueiro WHERE escalacao.id = ?");
+$resultado = $comando->execute([$idUsuarioLogado]);
+
+while ($linhas = $comando->fetch()) {
+    $id = $linhas["id"];
+    $nome = $linhas["nome"];
+    $foto = base64_encode($linhas["foto"]);
+    $posicao = $linhas["posicao"];
+    $preco = $linhas["preco"];
+    ?>
+    <div class="zagueiro">
+        <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarAtacantes();">
+        <div class="transparente1"></div>
+
+        <img src="data:image/jpeg;base64, <?php echo $foto; ?>" class="botao-foto" onclick="filtrarAtacantes();">
+        <div class="transparente1"></div>
+
+    </div>
+    <?php
+}
+?>
+
+<?php
+include("conecta.php"); // conectar com banco de dados
+
+$comando = $pdo->prepare("SELECT * FROM escalacao INNER JOIN jogadores ON jogadores.id = escalacao.lateral WHERE escalacao.id = ?");
+$resultado = $comando->execute([$idUsuarioLogado]);
+
+while ($linhas = $comando->fetch()) {
+    $id = $linhas["id"];
+    $nome = $linhas["nome"];
+    $foto = base64_encode($linhas["foto"]);
+    $posicao = $linhas["posicao"];
+    $preco = $linhas["preco"];
+    ?>
+    <div class="l">
+        <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarLaterais();">
+        <div class="transparente1"></div>
+
+        <img src="data:image/jpeg;base64, <?php echo $foto; ?>" class="botao-foto" onclick="filtrarLaterais();">
+        <div class="transparente1"></div>
+
+    </div>
+    <?php
+}
+?>
+
+
+<?php
+include("conecta.php"); // conectar com banco de dados
+
+$comando = $pdo->prepare("SELECT * FROM escalacao INNER JOIN jogadores ON jogadores.id = escalacao.goleiro WHERE escalacao.id = ?");
+$resultado = $comando->execute([$idUsuarioLogado]);
+
+while ($linhas = $comando->fetch()) {
+    $id = $linhas["id"];
+    $nome = $linhas["nome"];
+    $foto = base64_encode($linhas["foto"]);
+    $posicao = $linhas["posicao"];
+    $preco = $linhas["preco"];
+    ?>
+    <div class="goleiro">
+        <img src="data:image/jpeg;base64, <?php echo $foto; ?>" class="botao-foto" onclick="filtrarGoleiro();">
+        <div class="transparente1"></div>
+    </div>
+    <?php
+}
+?>
+
+<div class="atacante">
             <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarAtacantes();"></button>
             <div class="transparente"></div>
 
@@ -112,9 +246,6 @@
             </button>
             <div class="transparente1"></div>
         </div>
-
-
-
 
 
 
