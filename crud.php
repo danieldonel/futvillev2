@@ -8,7 +8,7 @@
     
     if(isset($_POST["inserir"]))
     {
-        $comando = $pdo->prepare("INSERT INTO cadastro VALUES('','$nome','$sobrenome','$email','$senha','$data_aniversario')" );
+        $comando = $pdo->prepare("INSERT INTO cadastro VALUES('','$nome','$sobrenome','$email','$senha','$data_aniversario','')" );
         $resultado = $comando->execute();
         header("Location:cadastro.php");
     }

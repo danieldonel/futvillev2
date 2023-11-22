@@ -5,6 +5,7 @@ body
     margin: 0px;
     font-family: Arial, Helvetica, sans-serif;
     color: black;
+    overflow: hidden;
 }
 
 .cabecalho
@@ -60,6 +61,7 @@ body
     align-content: center;
     position: absolute;
     left: -285px;
+    z-index: 3000;
 
     
    
@@ -72,6 +74,16 @@ body
 {
     0%{left:-285px;}    
     100%{left:0px;} 
+}
+
+.esconder
+{
+    animation: deslizar3 2s forwards;
+}
+@keyframes deslizar3
+{
+    0%{left:0;}    
+    100%{left:-285px;} 
 }
 
 .fechar
@@ -173,9 +185,10 @@ body
     font-size: 17px;
     border: #33333394 outset 0.3px;
     border-radius: 3px;
-    color: #33333394;
+    color: white;
     text-align: center;
     margin-top: 10px;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.327);
     
 }
 
@@ -248,3 +261,263 @@ body
     background-color: #c0392b;
   }
   
+  #formimagem
+  {
+    visibility: hidden;
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .lateral2
+  {
+      
+      position: fixed;
+      right: -245px;
+      top: 100px;
+      width: 385px;
+      height: 100%;
+      background-color: white;
+      text-align: center;
+      border-bottom:1px outset black ;
+      border-left:1px outset black ;
+    z-index: 3000;
+      
+    
+  }
+  .lateral2
+  {
+    height: 400px;  
+    width: 240px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      align-content: center;
+      position: absolute;
+      box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.327);
+      background-size: 100%;
+      background-image: #c0c0c094;
+      opacity: 0.8;
+    }
+
+      
+          
+         
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+     
+  
+  .animar2
+  {
+      animation: deslizar2 1s forwards;
+  }
+  @keyframes deslizar2
+  {
+      0%{right:-385px;}    
+      100%{right:0px;opacity: 1;} 
+  }
+
+  .animar3
+  {
+      animation: deslizar3 1s forwards;
+  }
+  @keyframes deslizar3
+  {
+      0%{right:0px;opacity: 1;}    
+      99%{right:-385px;opacity: 0;} 
+      100%{display: none;} 
+  }
+  
+  .fechar2
+  {
+      margin-top: 15px;
+      margin-left: 210px;
+      border-radius: 20px;
+      font-size: 18px;
+      display: flex;
+  
+  }
+
+  .fechar2
+{
+    margin-top: 365px;
+    margin-left: 20px;
+    border-radius: 20px;
+    font-size: 18px;
+    display: flex;
+    position: fixed;
+
+}
+
+.mensagem
+{
+    text-align: center;
+    size: 8px;
+    text-decoration: none;
+    color: #33333394;
+    text-align: center;
+    
+    line-height: 1.6;
+    font-family: Arial, Helvetica, sans-serif;    
+    
+}
+
+a{
+    text-decoration: none;
+}
+
+.titulo
+{
+    color: black;
+    text-align: center;
+    size: 7px;
+    height: 10px;
+}
+
+.titulo_inicio
+{
+    text-align: center;
+    color: #33333394;
+    font-family: Arial, Helvetica, sans-serif;    
+}
+
+
+
+
+
+
+
+
+
+
+  
+.footer-slide {
+   display: flex;
+   height: 240px;
+   width: 340px;
+  }
+  
+  .footer-slide img {
+    height: 240px;
+    width: 340px;
+  }
+  
+  .visible
+  {
+    opacity: 0;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .Caixa
+  {
+    width: 95%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+    background-color: whitesmoke;
+    
+  }
+
+  .titulonoticia
+  {
+    width: 320px;
+    height: 26px;
+    text-align: center;
+    font-size: 26px;
+    text-decoration: none;
+    color: #33333394;
+
+    font-family: Arial, Helvetica, sans-serif;    
+
+  }
+
+  .Subti
+  {
+    width: 320px;
+    height: 60px;
+    color: black;
+    text-align: center;
+    size: 7px;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #33333394;
+    font-family: Arial, Helvetica, sans-serif;    
+  
+    
+  }
+
+  .foto
+  {
+    width: 320px;
+    height: 179px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+  }

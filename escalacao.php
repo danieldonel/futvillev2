@@ -1,3 +1,37 @@
+
+<?php 
+session_start();
+
+include("conecta.php");
+
+if (!isset($_SESSION["nome"]))
+{
+        $texto="Faça login";
+        $imagem="img/perfilsemfoto.png";
+}
+else
+{
+    $texto=$_SESSION["nome"];
+   
+    $id=$_SESSION["id"];
+    $comando = $pdo->prepare("SELECT imagem_perfil FROM cadastro WHERE id=$id");
+    $resultado = $comando->execute();
+    while( $linhas = $comando->fetch() )
+    {
+        $dados_imagem = $linhas["imagem_perfil"];
+        $imagem = base64_encode($dados_imagem);
+       
+    }
+
+
+    //$imagem="img/imagem_conta.jpg";
+}    
+
+$erroLogin = $_GET["erroLogin"] ?? "";
+$erroVazio = $_GET["erroVazio"] ?? "";
+    
+$usuarioLogado = isset($_SESSION["logado"]) && $_SESSION["logado"] === true;
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,32 +41,124 @@
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="escalacao.css">
+    <link rel="stylesheet" href="cadastro.css">
     <link rel="stylesheet" href="rodape.css">
     <script src="rodape.js"></script>
     <script src="escalacao.js"></script>
 </head>
 <body>
-    <div class="cabecalho">
-        <div class="logo" onclick="Aparecer();"> 
+<div class="cabecalho">
+        <div class="logo" id="hamburguer" onclick="Aparecer();"> 
             <div class="menu"></div>
             <div class="menu"></div>
             <div class="menu"></div>
         </div>
         <div class="logo"><a href="pagina_inicial.php"><img src="img/LOGO FUT VILLE.png" width="280px"></div></a>
-        <div class="logo"><img src="img/noti.png" width="20px"></div>
+        <div class="logo" onclick="Aparecer2()"><img src="img/noti.png" width="20px"></div>
     </div>
 
 
         <div class="lateral" id="lateral">
-            <div onclick="Fechar();" class="fechar"><img src=img/x.png width="20px"></div>
-            <div class="menu_conta"></div>    
-            <div class="rodape2">Cadastro</div><br>
-            <div class="rodape2">Escalação</div><br>
-            <div class="rodape2">Competições</div><br>
-            <div class="rodape2">Ranking</div><br>
-            <div class="rodape2">Notícias</div><br>
-            <div class="rodape2">Dashboard</div><br>
+            <div onclick="Fechar();" class="fechar"><img src=img/x.png width="20px"></div> <br>      
+            <div class="foto_conta">
+                <div class="imagem_conta" onclick="escolherfoto();">
+
+                
+
+                
+             
+
+
+    <?php
+                  
+                if ($imagem=="" || $imagem=="img/perfilsemfoto.png")
+                {
+                    echo("<img class=\"imagem_conta\" src='img/perfilsemfoto.png' width=\"100%\">");
+ 
+                }
+                else{
+                echo("<img class=\"imagem_conta\" src='data:image/jpeg;base64,$imagem' width=\"100%\">");
+                
+
+            }
+            
+            
+     ?>       
+            
+            
+            </div>
+
+
+
+           
+
+
+
+            
+                <div class="nome_imagem"><?php echo( $texto); ?></div>
+            </div> <br><br>
+            <div class="menu_conta">  
+            <a href="cadastro.php"> <div class="rodape2">Cadastro</div></a><br>
+            <a href="escalacao.php"><div class="rodape2">Escalação</div><br>
+            <a href="competições.php"><div class="rodape2">Competições</div><br></a>
+           
+            <a href="noticiacerta.php"><div class="rodape2">Notícias</div><br></a>
+            <a href="dashboard.php"><div class="rodape2">Dashboard</div><br></a>
+            
+            <?php if ($usuarioLogado): ?>
+            <a href="logout.php" class="logout-button">
+            <span class="logout-icon"></span> Sair
+            </a>
+           
+            <form id="formimagem" action="adicionarfoto.php" method="post" enctype="multipart/form-data">
+            <input id="nova_imagem_perfil" type="file" onchange="enviar_foto();" name="foto" accept="image/*">
+           
+            </form>
+             <?php endif; ?>
+
+
+            </div>  
         </div>
+        
+  
+        
+    
+    
+        <div class="quadrado_anuncio"></div>
+
+        <div class="lateral2" id="lateral2">
+         
+                <h3 class="titulo">NOTIFICAÇÕES</h1>
+                
+        <?php
+include("conecta.php");
+$comando = $pdo->prepare("SELECT * FROM notificacao ");
+$resultado = $comando->execute();
+
+
+while ($linhas = $comando->fetch()) {
+    
+    $noti = $linhas["noti"];
+    $link = $linhas["link"];
+
+
+    echo ("
+ 
+    <br>
+  
+    
+    <a class=\"mensagem\" href=\"$link\"><div class=\"mensagem\" >$noti</div></a>");
+
+
+}
+?>
+        <div onclick="Fechar2();" class="fechar2"><img src=img/x.png width="20px"></div> 
+        
+    </script>
+
+
+    </div>
+</html>
     
     <div class="escalacao">
         <div class="SUAESCALAÇÃO"><b>SUA ESCALAÇÃO</b></div>
@@ -60,11 +186,9 @@
     
     <?php
 include("conecta.php"); // conectar com banco de dados
-session_start();
 
 if ($_SESSION["logado"]) {
     $idUsuarioLogado = $_SESSION["id"];
-    echo "ID do Usuário: $idUsuarioLogado<br>";
 } else {
     // O usuário não está logado
     // Redirecione ou tome outra ação apropriada
