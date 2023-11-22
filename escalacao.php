@@ -70,7 +70,7 @@ if ($_SESSION["logado"]) {
     // Redirecione ou tome outra ação apropriada
 }
 
-$comando = $pdo->prepare("SELECT * FROM escalacao INNER JOIN jogadores ON jogadores.id = escalacao.atacante WHERE escalacao.id = ?");
+$comando = $pdo->prepare("SELECT * FROM escalacao INNER JOIN jogadores1 ON jogadores1.id = escalacao.atacante WHERE escalacao.id = ?");
 $resultado = $comando->execute([$idUsuarioLogado]);
 
 while ($linhas = $comando->fetch()) {
@@ -81,13 +81,13 @@ while ($linhas = $comando->fetch()) {
     $preco = $linhas["preco"];
     ?>
     <div class="atacante">
-        <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarAtacantes();">
+        <img src="img/jogadores1.png" class="botao-atacante" onclick="filtrarAtacantes();">
         <div class="transparente"></div>
 
         <img src="data:image/jpeg;base64, <?php echo $foto; ?>" class="botao-foto" onclick="filtrarAtacantes();">
         <div class="transparente"></div>
 
-        <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarAtacantes();">
+        <img src="img/jogadores1.png" class="botao-atacante" onclick="filtrarAtacantes();">
         <div class="transparente"></div>
     </div>
     <?php
@@ -97,7 +97,7 @@ while ($linhas = $comando->fetch()) {
 <?php
 include("conecta.php"); // conectar com banco de dados
 
-$comando = $pdo->prepare("SELECT * FROM escalacao INNER JOIN jogadores ON jogadores.id = escalacao.meio WHERE escalacao.id = ?");
+$comando = $pdo->prepare("SELECT * FROM escalacao INNER JOIN jogadores1 ON jogadores1.id = escalacao.meio WHERE escalacao.id = ?");
 $resultado = $comando->execute([$idUsuarioLogado]);
 
 while ($linhas = $comando->fetch()) {
@@ -108,13 +108,13 @@ while ($linhas = $comando->fetch()) {
     $preco = $linhas["preco"];
     ?>
     <div class="meiocampo">
-        <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarMeias();">
+        <img src="img/jogadores1.png" class="botao-atacante" onclick="filtrarMeias();">
         <div class="transparente"></div>
 
         <img src="data:image/jpeg;base64, <?php echo $foto; ?>" class="botao-foto" onclick="filtrarMeias();">
         <div class="transparente"></div>
 
-        <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarMeias();">
+        <img src="img/jogadores1.png" class="botao-atacante" onclick="filtrarMeias();">
         <div class="transparente"></div>
     </div>
     <?php
@@ -124,7 +124,7 @@ while ($linhas = $comando->fetch()) {
 <?php
 include("conecta.php"); // conectar com banco de dados
 
-$comando = $pdo->prepare("SELECT * FROM escalacao INNER JOIN jogadores ON jogadores.id = escalacao.zagueiro WHERE escalacao.id = ?");
+$comando = $pdo->prepare("SELECT * FROM escalacao INNER JOIN jogadores1 ON jogadores1.id = escalacao.zagueiro WHERE escalacao.id = ?");
 $resultado = $comando->execute([$idUsuarioLogado]);
 
 while ($linhas = $comando->fetch()) {
@@ -135,7 +135,7 @@ while ($linhas = $comando->fetch()) {
     $preco = $linhas["preco"];
     ?>
     <div class="zagueiro">
-        <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarAtacantes();">
+        <img src="img/jogadores1.png" class="botao-atacante" onclick="filtrarAtacantes();">
         <div class="transparente1"></div>
 
         <img src="data:image/jpeg;base64, <?php echo $foto; ?>" class="botao-foto" onclick="filtrarAtacantes();">
@@ -149,7 +149,7 @@ while ($linhas = $comando->fetch()) {
 <?php
 include("conecta.php"); // conectar com banco de dados
 
-$comando = $pdo->prepare("SELECT * FROM escalacao INNER JOIN jogadores ON jogadores.id = escalacao.lateral WHERE escalacao.id = ?");
+$comando = $pdo->prepare("SELECT * FROM escalacao INNER JOIN jogadores1 ON jogadores1.id = escalacao.lateral WHERE escalacao.id = ?");
 $resultado = $comando->execute([$idUsuarioLogado]);
 
 while ($linhas = $comando->fetch()) {
@@ -160,7 +160,7 @@ while ($linhas = $comando->fetch()) {
     $preco = $linhas["preco"];
     ?>
     <div class="l">
-        <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarLaterais();">
+        <img src="img/jogadores1.png" class="botao-atacante" onclick="filtrarLaterais();">
         <div class="transparente1"></div>
 
         <img src="data:image/jpeg;base64, <?php echo $foto; ?>" class="botao-foto" onclick="filtrarLaterais();">
@@ -175,7 +175,7 @@ while ($linhas = $comando->fetch()) {
 <?php
 include("conecta.php"); // conectar com banco de dados
 
-$comando = $pdo->prepare("SELECT * FROM escalacao INNER JOIN jogadores ON jogadores.id = escalacao.goleiro WHERE escalacao.id = ?");
+$comando = $pdo->prepare("SELECT * FROM escalacao INNER JOIN jogadores1 ON jogadores1.id = escalacao.goleiro WHERE escalacao.id = ?");
 $resultado = $comando->execute([$idUsuarioLogado]);
 
 while ($linhas = $comando->fetch()) {
@@ -194,7 +194,7 @@ while ($linhas = $comando->fetch()) {
 ?>
 
 <div class="atacante">
-            <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarAtacantes();"></button>
+            <img src="img/jogadores1.png" class="botao-atacante" onclick="filtrarAtacantes();"></button>
             <div class="transparente"></div>
 
             <button class="botao-atacante" onclick="filtrarAtacantes();">
@@ -202,12 +202,12 @@ while ($linhas = $comando->fetch()) {
             </button>
             <div class="transparente"></div>
 
-            <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarAtacantes();"></button>
+            <img src="img/jogadores1.png" class="botao-atacante" onclick="filtrarAtacantes();"></button>
             <div class="transparente"></div>
         </div>
 
         <div class="meiocampo">
-        <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarAtacantes();"></button>
+        <img src="img/jogadores1.png" class="botao-atacante" onclick="filtrarAtacantes();"></button>
             <div class="transparente"></div>
 
 
@@ -216,13 +216,13 @@ while ($linhas = $comando->fetch()) {
             </button>
             <div class="transparente"></div>
 
-            <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarAtacantes();"></button>
+            <img src="img/jogadores1.png" class="botao-atacante" onclick="filtrarAtacantes();"></button>
             <div class="transparente"></div>
 
         </div>
 
         <div class="zagueiro">
-        <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarAtacantes();"></button>
+        <img src="img/jogadores1.png" class="botao-atacante" onclick="filtrarAtacantes();"></button>
             <div class="transparente1"></div>
 
 
@@ -231,7 +231,7 @@ while ($linhas = $comando->fetch()) {
             </button>
             <div class="transparente1"></div>
 
-            <img src="img/jogadores.png" class="botao-atacante" onclick="filtrarAtacantes();"></button>
+            <img src="img/jogadores1.png" class="botao-atacante" onclick="filtrarAtacantes();"></button>
             <div class="transparente1"></div>
 
             <button class="botao-atacante" onclick="filtrarZagueiros();">
@@ -249,51 +249,62 @@ while ($linhas = $comando->fetch()) {
 
 
 
-    <?php
-        
-        include("conecta.php"); // conectar com banco de dados
-        $comando = $pdo->prepare("SELECT * FROM `jogadores`");
-        $resultado = $comando->execute();
-        while ($linhas = $comando->fetch()) {
-            $id = $linhas ["id"];
-            $nome = $linhas["nome"];
-            $foto = $linhas["foto"];
-            $foto = base64_encode($foto);
-            $posicao = $linhas["posicao"];
-            $preco = $linhas["preco"];
-        
-            
-            echo("<div style=\"margin-bottom: 10px;\"></div>");
-    
-        
-            echo("
-                <div class=\"tudo\" data-posicao=\"$posicao\">
-                    <div class=\"fild\">
-                        <img src=\"data:image/jpeg;base64,$foto\" class=\"fotomercado\" width='120px' height='120px'>
-                        
-                        
-                     <div class=\"jogador\">
-                        <div class=\"nome\">$nome</div>
+        <?php
+include("conecta.php");
 
-                        <div class=\"posicao\">$posicao</div>
-                        <br>
+// Supondo que você tenha uma variável $idUsuario definida em algum lugar do seu código.
+$idUsuario = 1;
 
-                        <div class=\"info\">
-                            <div class=\"precos\">
+$comando = $pdo->prepare("SELECT * FROM `jogadores1`");
+$resultado = $comando->execute();
+
+while ($linhas = $comando->fetch()) {
+    $id = $linhas["id"];
+    $nome = $linhas["nome"];
+    $foto = $linhas["foto"];
+    $foto = base64_encode($foto);
+    $posicao = $linhas["posicao"];
+    $preco = $linhas["preco"];
+
+    // Verifica se o jogador está na escalação do usuário
+    $comandoVerificaEscala = $pdo->prepare("SELECT COUNT(*) FROM `escalacao` WHERE `id` = ? AND (`atacante` = ? OR `meio` = ? OR `lateral` = ? OR `goleiro` = ? OR `zagueiro` = ?)");
+    $comandoVerificaEscala->execute([$idUsuarioLogado, $id, $id, $id, $id, $id]);
+    $jogadorNaEscala = $comandoVerificaEscala->fetchColumn() > 0;
+
+    echo("<div style=\"margin-bottom: 10px;\"></div>");
+
+    echo("
+        <div class=\"tudo\" data-posicao=\"$posicao\">
+            <div class=\"fild\">
+                <img src=\"data:image/jpeg;base64,$foto\" class=\"fotomercado\" width='120px' height='120px'>
+
+                <div class=\"jogador\">
+                    <div class=\"nome\">$nome</div>
+
+                    <div class=\"posicao\">$posicao</div>
+                    <br>
+
+                    <div class=\"info\">
+                        <div class=\"precos\">
                             F$<div class=\"preco\">$preco</div>
-                            </div>
-                            
-                            <button class=\"comprar botao-comprar\" data-action=\"comprar\" data-id=\"$id\" data-posicao=\"$posicao\"> COMPRAR </button>
-                        </div>
+                        </div>");
 
-                        </div>
-                        </div>
-                     </div>
+    if ($jogadorNaEscala) {
+        // Se o jogador estiver na escalação, exibe o botão VENDER
+        echo("<button class=\"comprar botao-vender\" data-action=\"vender\" data-id=\"$id\" data-posicao=\"$posicao\"> VENDER </button>");
+    } else {
+        // Se o jogador não estiver na escalação, exibe o botão COMPRAR
+        echo("<button class=\"comprar botao-comprar\" data-action=\"comprar\" data-id=\"$id\" data-posicao=\"$posicao\"> COMPRAR </button>");
+    }
 
-
-                ");
-            }
-        ?>
+    echo("
+                    </div>
+                </div>
+            </div>
+        </div>
+    ");
+}
+?>
 
 </div>
 

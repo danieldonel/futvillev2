@@ -106,6 +106,34 @@ $(document).ready(function () {
                 // Se a resposta for um JSON, você pode acessar os dados assim:
                 // var jsonData = JSON.parse(response);
                 // console.log(jsonData);
+                window.location.reload();
+            },
+            error: function (error) {
+                // Lidar com erros, se houver
+                console.error(error);
+            }
+        });
+    });
+});
+
+$(document).ready(function () {
+    $(".botao-vender").on("click", function () {
+        var idJogador = $(this).data("id");
+        var posicao = $(this).data("posicao");
+
+        // Use $.ajax em vez de ajax
+        $.ajax({
+            type: "POST",
+            url: "remover_escalacao.php",
+            data: { id_jogador: idJogador, posicao: posicao },
+            success: function (response) {
+                // Manipular a resposta do servidor, se necessário
+                console.log(response);
+
+                // Se a resposta for um JSON, você pode acessar os dados assim:
+                // var jsonData = JSON.parse(response);
+                // console.log(jsonData);
+                window.location.reload();
             },
             error: function (error) {
                 // Lidar com erros, se houver
